@@ -1,16 +1,13 @@
-
+import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,13 +17,22 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.test_proyectofinal.R
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyBankView() {
+fun card1(navController: NavController) {
+    Scaffold(
+        content = { MyBankView(navController) }
+    )
+}
+
+@Composable
+fun MyBankView(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -43,137 +49,164 @@ fun MyBankView() {
             )
         }
 
-        // Spacer(modifier = Modifier.height(1.dp))
-        // Referencia directa a un recurso en la carpeta "drawable"
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color(0xFFFCEAC8))
                 .padding(27.dp)
-        ){
-        val imageResId = R.drawable.ecobanco
+        ) {
+            val imageResId = R.drawable.ecobanco
 
-        // Utilización de la imagen en un componente de Compose
-        Image(
-            painter = painterResource(id = imageResId),
-            contentDescription = null,
+            Image(
+                painter = painterResource(id = imageResId),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .size(200.dp)
+            )
+        }
+
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .size(200.dp)
+                .background(Color(0xFFFCEAC8)),
+            contentAlignment = Alignment.Center
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color(0xFFFCEAC8))
+                    .padding(5.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(35.dp)
+                        .background(
+                            color = Color(0xFFF24E29),
+                            shape = CircleShape
+                        )
+                        .clickable { navController.navigate("vist1") },
+                )
 
-        )}
+                Box(
+                    modifier = Modifier
+                        .size(35.dp)
+                        .clickable { navController.navigate("vist2") }
+                        .background(
+                            color = Color(0xFF962831),
+                            shape = CircleShape
+                        )
+                )
+
+                Box(
+                    modifier = Modifier
+                        .size(35.dp)
+                        .background(
+                            color = Color(0xFF962831),
+                            shape = CircleShape
+                        )
+                        .clickable { navController.navigate("vist3") }
+                )
+            }
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
                 .padding(27.dp)
-        ){
+        ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-            ){
-            Text(
-                text = "Actividades Recientes",
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 20.sp),
-                color = Color.Black,
-                modifier = Modifier
-                    .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                    .padding(8.dp) // Ajusta el relleno según sea necesario
-                    .align(Alignment.Start) //
-
-            )
-
-            Text(
-                text = "Eco cajero",
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
-                color = Color.Black,
-                modifier = Modifier
-                    .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                    .padding(8.dp) // Ajusta el relleno según sea necesario
-                    .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
-            )
+            ) {
                 Text(
-                    text = "03 nov. 2023 - 12:39 pm",
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
+                    text = "Actividades Recientes",
+                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 20.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
                 )
+
                 Text(
                     text = "Eco cajero",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
                 )
                 Text(
                     text = "03 nov. 2023 - 12:39 pm",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
                 )
                 Text(
                     text = "Eco cajero",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
                 )
                 Text(
                     text = "03 nov. 2023 - 12:39 pm",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
                 )
                 Text(
                     text = "Eco cajero",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
                 )
                 Text(
                     text = "03 nov. 2023 - 12:39 pm",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
                 )
                 Text(
                     text = "Eco cajero",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
                     color = Color.Black,
                     modifier = Modifier
-                        .fillMaxWidth() // Asegura que el texto ocupe todo el ancho disponible
-                        .padding(8.dp) // Ajusta el relleno según sea necesario
-                        .align(Alignment.Start) // Alinea el texto hacia la izquierda
-
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
                 )
+                Text(
+                    text = "03 nov. 2023 - 12:39 pm",
+                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
+                    color = Color.Black,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.Start)
+                )
+
+                // Repite estas líneas según sea necesario para más actividades recientes
+
             }
         }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -184,96 +217,73 @@ fun MyBankView() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                val context = LocalContext.current
 
+                val drawableId = context.resources.getIdentifier("hogar", "drawable", context.packageName)
+                val imageBitmap = BitmapFactory.decodeResource(context.resources, drawableId).asImageBitmap()
 
-            val context = LocalContext.current
+                Image(
+                    bitmap = imageBitmap,
+                    contentDescription = null,
+                    modifier = Modifier.size(30.dp),
+                    contentScale = ContentScale.Crop
+                )
 
-            // Reemplaza "mi_icono" con el nombre real de tu icono en "drawable"
-            val drawableId = context.resources.getIdentifier("hogar", "drawable", context.packageName)
-
-            // Cargar el icono como ImageBitmap
-            val imageBitmap = BitmapFactory.decodeResource(context.resources, drawableId).asImageBitmap()
-
-            // Utilizar el icono en un componente de Compose
-            Image(
-                bitmap = imageBitmap,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(30.dp),
-
-                contentScale = ContentScale.Crop
-            )
                 Text(
                     text = "Inicio",
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.White
-                )}
+                )
+            }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-
             ) {
-            val context1 = LocalContext.current
+                val context = LocalContext.current
 
-            // Reemplaza "mi_icono" con el nombre real de tu icono en "drawable"
-            val drawableId1 = context1.resources.getIdentifier("arbol", "drawable", context1.packageName)
+                val drawableId = context.resources.getIdentifier("arbol", "drawable", context.packageName)
+                val imageBitmap = BitmapFactory.decodeResource(context.resources, drawableId).asImageBitmap()
 
-            // Cargar el icono como ImageBitmap
-            val imageBitmap1 = BitmapFactory.decodeResource(context1.resources, drawableId1).asImageBitmap()
+                Image(
+                    bitmap = imageBitmap,
+                    contentDescription = null,
+                    modifier = Modifier.size(30.dp),
+                    contentScale = ContentScale.Crop
+                )
 
-            // Utilizar el icono en un componente de Compose
-            Image(
-                bitmap = imageBitmap1,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(30.dp),
-
-                contentScale = ContentScale.Crop
-            )
                 Text(
                     text = "Mi arbol",
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.White
                 )
+
+
             }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-
             ) {
-            val context2 = LocalContext.current
+                val context = LocalContext.current
 
-            // Reemplaza "mi_icono" con el nombre real de tu icono en "drawable"
-            val drawableId2 = context2.resources.getIdentifier("rompecabezas", "drawable", context2.packageName)
+                val drawableId = context.resources.getIdentifier("rompecabezas", "drawable", context.packageName)
+                val imageBitmap = BitmapFactory.decodeResource(context.resources, drawableId).asImageBitmap()
 
-            // Cargar el icono como ImageBitmap
-            val imageBitmap2 = BitmapFactory.decodeResource(context2.resources, drawableId2).asImageBitmap()
+                Image(
+                    bitmap = imageBitmap,
+                    contentDescription = null,
+                    modifier = Modifier.size(30.dp),
+                    contentScale = ContentScale.Crop
+                )
 
-            // Utilizar el icono en un componente de Compose
-            Image(
-                bitmap = imageBitmap2,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(30.dp),
-
-                contentScale = ContentScale.Crop
-            )
                 Text(
                     text = "Ajustes",
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.White
                 )
+
+
             }
 
+
+            // ... otros bloques de código similares para "Mi árbol" y "Ajustes"
         }
-
-
-
-    }
-}
-
-@Preview
-@Composable
-fun MyBankPreview() {
-    MaterialTheme {
-        MyBankView()
     }
 }
